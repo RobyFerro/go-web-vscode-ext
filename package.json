@@ -16,14 +16,39 @@
 		"url": "https://github.com/RobyFerro/go-web-vscode-ext.git"
 	},
 	"activationEvents": [
-		"onCommand:extension.gowebInstaller"
+		"onCommand:goweb.install",
+		"onCommand:goweb.createController",
+		"onCommand:goweb.createMiddleware",
+		"onCommand:goweb.createMigration",
+		"onCommand:goweb.createCommand",
+		"onCommand:goweb.createModel"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "extension.gowebInstaller",
+				"command": "goweb.install",
 				"title": "Go-Web: New Project"
+			},
+			{
+				"command": "goweb.createController",
+				"title": "Go-Web: Create controller"
+			},
+			{
+				"command": "goweb.createMiddleware",
+				"title": "Go-Web: Create middleware"
+			},
+			{
+				"command": "goweb.createMigration",
+				"title": "Go-Web: Create migration"
+			},
+			{
+				"command": "goweb.createCommand",
+				"title": "Go-Web: Create command"
+			},
+			{
+				"command": "goweb.createModel",
+				"title": "Go-Web: Create model"
 			}
 		]
 	},

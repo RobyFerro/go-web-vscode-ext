@@ -1,38 +1,22 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-import { Install } from './commands/install';
+import { createGwf } from './commands/install';
+import { createController } from './commands/create_controller';
+import { createMigration } from './commands/create_migration';
+import { createCommand } from './commands/create_command';
+import { createModel } from './commands/create_model';
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
 
-	const options: vscode.OpenDialogOptions = {
-		canSelectMany: false,
-		openLabel: 'Select as project directory',
-		canSelectFolders: true,
-		canSelectFiles: false,
-	};
+	let commands = [
+		vscode.commands.registerCommand('goweb.install', createGwf),
+		vscode.commands.registerCommand('goweb.createController', createController),
+		vscode.commands.registerCommand('goweb.createMiddleware', createController),
+		vscode.commands.registerCommand('goweb.createMigration', createMigration),
+		vscode.commands.registerCommand('goweb.createCommand', createCommand),
+		vscode.commands.registerCommand('goweb.createModel', createModel),
+	];
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "go-web" is now active!');
-
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('extension.gowebInstaller', () => {
-		vscode.window.showOpenDialog(options).then(fileUri => {
-			if (fileUri && fileUri[0]) {
-				//console.log('Selected file: ' + fileUri[0].fsPath);
-				let gw = new Install(fileUri[0].fsPath);
-				gw.run();
-			}
-		});
-	});
-
-	context.subscriptions.push(disposable);
+	for (let cmd of commands) {
+		context.subscriptions.push(cmd);
+	}
 }
-
-// this method is called when your extension is deactivated
-export function deactivate() { }
