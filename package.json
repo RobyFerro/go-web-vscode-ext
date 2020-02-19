@@ -4,7 +4,7 @@
 	"publisher": "Roberto",
 	"description": "Go-Web installer",
 	"icon": "img/logo.png",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"engines": {
 		"vscode": "^1.42.0"
 	},
@@ -21,7 +21,8 @@
 		"onCommand:goweb.createMiddleware",
 		"onCommand:goweb.createMigration",
 		"onCommand:goweb.createCommand",
-		"onCommand:goweb.createModel"
+		"onCommand:goweb.createModel",
+		"onCommand:goweb.generateKey"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -49,6 +50,10 @@
 			{
 				"command": "goweb.createModel",
 				"title": "Go-Web: Create model"
+			},
+			{
+				"command": "goweb.generateKey",
+				"title": "Go-Web: Generate app key"
 			}
 		]
 	},

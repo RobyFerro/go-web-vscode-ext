@@ -30,4 +30,9 @@ export class Command {
     public static createModel(basePath: string, name: string): void {
         child_process.execSync(`cd ${basePath} && ./goweb model:create ${name}`);
     }
+
+    // Generate application app.key
+    public static generateKey(basePath: string): void {
+        child_process.execSync(`cd ${basePath} && ./goweb generate:key`);
+    }
 }

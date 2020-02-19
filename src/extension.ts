@@ -4,6 +4,7 @@ import { createController } from './commands/create_controller';
 import { createMigration } from './commands/create_migration';
 import { createCommand } from './commands/create_command';
 import { createModel } from './commands/create_model';
+import { generateKey } from './commands/generate_key';
 
 export function activate(context: vscode.ExtensionContext) {
 
@@ -14,6 +15,7 @@ export function activate(context: vscode.ExtensionContext) {
 		vscode.commands.registerCommand('goweb.createMigration', createMigration),
 		vscode.commands.registerCommand('goweb.createCommand', createCommand),
 		vscode.commands.registerCommand('goweb.createModel', createModel),
+		vscode.commands.registerCommand('goweb.generateKey', generateKey),
 	];
 
 	for (let cmd of commands) {
