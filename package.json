@@ -4,7 +4,7 @@
 	"publisher": "Roberto",
 	"description": "Go-Web Framework helper.",
 	"icon": "img/logo.png",
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"engines": {
 		"vscode": "^1.42.0"
 	},
