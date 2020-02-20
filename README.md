@@ -16,3 +16,4 @@ The following commands are presents in this extension:
 - ***Go-Web: Create model***
 - ***Go-Web: Create migration***
 - ***Go-Web: Create command***
+- ***Go-Web: Create async job***
