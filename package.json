@@ -16,48 +16,70 @@
 		"url": "https://github.com/RobyFerro/go-web-vscode-ext.git"
 	},
 	"activationEvents": [
+		"onView:gowebCommand",
 		"onCommand:goweb.install",
-		"onCommand:goweb.createController",
-		"onCommand:goweb.createMiddleware",
-		"onCommand:goweb.createMigration",
-		"onCommand:goweb.createCommand",
-		"onCommand:goweb.createModel",
-		"onCommand:goweb.generateKey",
-		"onCommand:goweb.createJob"
+		"onCommand:goweb.install.Key",
+		"onCommand:goweb.create.Controller",
+		"onCommand:goweb.create.Middleware",
+		"onCommand:goweb.create.Migration",
+		"onCommand:goweb.create.Command",
+		"onCommand:goweb.create.Model",
+		"onCommand:goweb.create.Job"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
+		"viewsContainers": {
+			"activitybar": [
+				{
+					"id": "goweb",
+					"title": "Go-Web framework",
+					"icon": "img/logo.svg"
+				}
+			]
+		},
+		"views": {
+			"goweb": [
+				{
+					"id": "gowebInstallation",
+					"name": "Installation"
+				},
+				{
+					"id": "gowebCommand",
+					"name": "Create components"
+				}
+			]
+		},
 		"commands": [
 			{
 				"command": "goweb.install",
 				"title": "Go-Web: New Project"
 			},
 			{
-				"command": "goweb.createController",
+				"command": "goweb.create.Controller",
 				"title": "Go-Web: Create controller"
 			},
 			{
-				"command": "goweb.createMiddleware",
+				"command": "goweb.create.Middleware",
 				"title": "Go-Web: Create middleware"
 			},
 			{
-				"command": "goweb.createMigration",
+				"command": "goweb.create.Migration",
 				"title": "Go-Web: Create migration"
 			},
 			{
-				"command": "goweb.createCommand",
+				"command": "goweb.create.Command",
 				"title": "Go-Web: Create command"
 			},
 			{
-				"command": "goweb.createModel",
+				"command": "goweb.create.Model",
 				"title": "Go-Web: Create model"
 			},
 			{
-				"command": "goweb.generateKey",
+				"command": "goweb.install.Key",
 				"title": "Go-Web: Generate app key"
 			},
 			{
-				"command": "goweb.createJob",
+				"command": "goweb.create.Job",
 				"title": "Go-Web: Generate async job"
 			}
 		]
