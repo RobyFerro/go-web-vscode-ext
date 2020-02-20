@@ -22,7 +22,8 @@
 		"onCommand:goweb.createMigration",
 		"onCommand:goweb.createCommand",
 		"onCommand:goweb.createModel",
-		"onCommand:goweb.generateKey"
+		"onCommand:goweb.generateKey",
+		"onCommand:goweb.createJob"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -54,6 +55,10 @@
 			{
 				"command": "goweb.generateKey",
 				"title": "Go-Web: Generate app key"
+			},
+			{
+				"command": "goweb.createJob",
+				"title": "Go-Web: Generate async job"
 			}
 		]
 	},
