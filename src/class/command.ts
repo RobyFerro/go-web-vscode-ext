@@ -1,42 +1,58 @@
 import * as child_process from "child_process";
 
 export class Command {
+
+    private command: string = "";
+
     // Rebuild go-web application
-    public static build(basePath: string): void {
-        child_process.execSync(`cd ${basePath} && go build goweb.go`);
+    public build(basePath: string): void {
+        this.command = `cd ${basePath} && go build goweb.go`;
     }
 
     // Create new controller into Go-Web application
-    public static createController(basePath: string, name: string): void {
-        child_process.execSync(`cd ${basePath} && ./goweb controller:create ${name}`);
+    public createController(basePath: string, name: string): void {
+        this.command = `cd ${basePath} && ./goweb controller:create ${name}`;
     }
 
     // Create new middleware into Go-Web application
-    public static createMiddleware(basePath: string, name: string): void {
-        child_process.execSync(`cd ${basePath} && ./goweb middleware:create ${name}`);
+    public createMiddleware(basePath: string, name: string): void {
+        this.command = `cd ${basePath} && ./goweb middleware:create ${name}`;
     }
 
     // Create new migration into Go-Web application
-    public static createMigration(basePath: string, name: string): void {
-        child_process.execSync(`cd ${basePath} && ./goweb migration:create ${name}`);
+    public createMigration(basePath: string, name: string): void {
+        this.command = `cd ${basePath} && ./goweb migration:create ${name}`;
     }
 
     // Create new command into Go-Web application
-    public static createCommand(basePath: string, name: string): void {
-        child_process.execSync(`cd ${basePath} && ./goweb cmd:create ${name}`);
+    public createCommand(basePath: string, name: string): void {
+        this.command = `cd ${basePath} && ./goweb cmd:create ${name}`;
     }
 
     // Create new model into Go-Web application
-    public static createModel(basePath: string, name: string): void {
-        child_process.execSync(`cd ${basePath} && ./goweb model:create ${name}`);
+    public createModel(basePath: string, name: string): void {
+        this.command = `cd ${basePath} && ./goweb model:create ${name}`;
     }
 
     // Generate application app.key
-    public static generateKey(basePath: string): void {
-        child_process.execSync(`cd ${basePath} && ./goweb generate:key`);
+    public generateKey(basePath: string): void {
+        this.command = `cd ${basePath} && ./goweb generate:key`;
     }
 
-    public static createJob(basePath: string, name: string): void {
-        child_process.execSync(`cd ${basePath} && ./goweb job:create ${name}`);
+    public createJob(basePath: string, name: string): void {
+        this.command = `cd ${basePath} && ./goweb job:create ${name}`;
+    }
+
+    public run(): Promise<void> {
+        return new Promise((resolve, reject) => {
+            try {
+                child_process.execSync(this.command);
+            } catch (e) {
+                reject(e);
+            }
+
+
+            resolve();
+        });
     }
 }

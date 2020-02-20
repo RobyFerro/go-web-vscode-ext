@@ -6,11 +6,16 @@ export async function createMigration(){
         placeHolder: 'Insert migration name'
     });
 
-    let basePath = vscode.workspace.rootPath;
+    let basePath = vscode.workspace.rootPath,
+        command = new Command();
     if (basePath !== undefined && migrationName !== undefined) {
-        Command.build(basePath);
-        Command.createMigration(basePath, migrationName);
-    }
+        command.build(basePath);
+        command.createMigration(basePath, migrationName);
 
-    vscode.window.showInformationMessage('Your migration has been created!');
+        command.run().then(() => {
+            vscode.window.showInformationMessage('Your migration has been created!');
+        }).catch(e => {
+            vscode.window.showErrorMessage("Failed to create new migration");
+        });
+    }
 }
