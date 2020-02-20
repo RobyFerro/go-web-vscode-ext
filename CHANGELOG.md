@@ -5,6 +5,13 @@ All notable changes to the "go-web" extension will be documented in this file.
 ## [Unreleased]
 - Start/Stop Go-web server from VSCode
 
+## [1.0.5] - 2020-02-19
+### Added
+- Select Go-Web version to install
+
+### Changed
+- Improved readme
+
 ## [1.0.4] - 2020-02-18
 ### Added
 - Insert app key generate command
