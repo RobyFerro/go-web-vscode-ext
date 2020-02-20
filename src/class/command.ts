@@ -35,4 +35,8 @@ export class Command {
     public static generateKey(basePath: string): void {
         child_process.execSync(`cd ${basePath} && ./goweb generate:key`);
     }
+
+    public static createJob(basePath: string, name: string): void {
+        child_process.execSync(`cd ${basePath} && ./goweb job:create ${name}`);
+    }
 }
