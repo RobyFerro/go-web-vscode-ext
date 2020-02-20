@@ -2,7 +2,6 @@ import * as vscode from 'vscode';
 import * as shell from "shelljs";
 import * as child_process from "child_process";
 import * as simplegit from 'simple-git/promise';
-import { Command } from './command';
 
 export class Install {
     private destination: string;
@@ -16,13 +15,25 @@ export class Install {
     }
 
     // Run project installation
-    public run(): void {
-        this.git.clone("http://github.com/RobyFerro/go-web.git", this.destination).then(() => {
-            this.config();
-            this.getGoModules();
-            vscode.commands.executeCommand('vscode.openFolder', this.destinationURI);
-        }).catch(e => {
-            console.log(e);
+    public run(): Promise<void> {
+        return new Promise(async (resolve, reject) => {
+            const version = await vscode.window.showInputBox({
+                placeHolder: 'Insert Go-Web version'
+            });
+
+            if (version === undefined) {
+                vscode.window.showErrorMessage("Go-Web installation failed! Missing version number!");
+                return;
+            }
+
+            this.git.clone(`http://github.com/RobyFerro/go-web.git`, this.destination, ["--branch", version]).then(() => {
+                this.config();
+                this.getGoModules();
+                resolve();
+                vscode.commands.executeCommand('vscode.openFolder', this.destinationURI);
+            }).catch(e => {
+                reject(e);
+            });
         });
     }
 
