@@ -1,22 +1,20 @@
 import * as vscode from 'vscode';
-import { Command } from '../class/command';
+import { CreateModel } from '../class/create_model';
 
 export async function createModel() {
     const modelCreate = await vscode.window.showInputBox({
         placeHolder: 'Insert model name'
     });
 
-    let basePath = vscode.workspace.rootPath,
-        command = new Command();
+    let command = new CreateModel();
 
-    if (basePath !== undefined && modelCreate !== undefined) {
-        command.build(basePath);
-        command.createModel(basePath, modelCreate);
+    if (modelCreate !== undefined) {
+        command.build(modelCreate);
 
         command.run().then(() => {
             vscode.window.showInformationMessage('Your model has been created! Do not forget to register it');
         }).catch(e => {
-            vscode.window.showErrorMessage("Failed to create new model");
+            vscode.window.showErrorMessage("Failed to create new model", e);
         });
     }
 }

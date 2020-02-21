@@ -1,22 +1,20 @@
 import * as vscode from 'vscode';
-import { Command } from '../class/command';
+import { CreateController } from '../class/create_controller';
 
 export async function createController() {
     const controllerName = await vscode.window.showInputBox({
         placeHolder: 'Insert controller name'
     });
 
-    let basePath = vscode.workspace.rootPath,
-        command = new Command();
+    let command = new CreateController();
 
-    if (basePath !== undefined && controllerName !== undefined) {
-        command.build(basePath);
-        command.createController(basePath, controllerName);
-        
+    if (controllerName !== undefined) {
+        command.build(controllerName);
+
         command.run().then(() => {
             vscode.window.showInformationMessage('Your controller has been created! Do not forget to register it!');
         }).catch(e => {
-            vscode.window.showErrorMessage("Failed to create new controller");
+            vscode.window.showErrorMessage("Failed to create new controller", e);
         });
     }
 }

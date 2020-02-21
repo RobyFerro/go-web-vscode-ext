@@ -1,56 +1,32 @@
-import * as child_process from "child_process";
+import * as vscode from 'vscode';
+import { execSync } from "child_process";
 
 export class Command {
 
-    private command: string = "";
+    public command: string = "";
 
-    // Rebuild go-web application
-    public build(basePath: string): void {
-        this.command = `cd ${basePath} && go build goweb.go`;
+    /**
+     * Compile Go-Web application
+     */
+    private compile(): void {
+        try {
+            execSync('go build goweb.go', { cwd: vscode.workspace.rootPath });
+        } catch (e) {
+            vscode.window.showErrorMessage("Failed do build Go-Web application", e);
+        }
     }
 
-    // Create new controller into Go-Web application
-    public createController(basePath: string, name: string): void {
-        this.command = `cd ${basePath} && ./goweb controller:create ${name}`;
-    }
-
-    // Create new middleware into Go-Web application
-    public createMiddleware(basePath: string, name: string): void {
-        this.command = `cd ${basePath} && ./goweb middleware:create ${name}`;
-    }
-
-    // Create new migration into Go-Web application
-    public createMigration(basePath: string, name: string): void {
-        this.command = `cd ${basePath} && ./goweb migration:create ${name}`;
-    }
-
-    // Create new command into Go-Web application
-    public createCommand(basePath: string, name: string): void {
-        this.command = `cd ${basePath} && ./goweb cmd:create ${name}`;
-    }
-
-    // Create new model into Go-Web application
-    public createModel(basePath: string, name: string): void {
-        this.command = `cd ${basePath} && ./goweb model:create ${name}`;
-    }
-
-    // Generate application app.key
-    public generateKey(basePath: string): void {
-        this.command = `cd ${basePath} && ./goweb generate:key`;
-    }
-
-    public createJob(basePath: string, name: string): void {
-        this.command = `cd ${basePath} && ./goweb job:create ${name}`;
-    }
-
+    /**
+     * Run specific command
+     */
     public run(): Promise<void> {
         return new Promise((resolve, reject) => {
+            this.compile();
             try {
-                child_process.execSync(this.command);
+                execSync(this.command, { cwd: vscode.workspace.rootPath });
             } catch (e) {
                 reject(e);
             }
-
 
             resolve();
         });
