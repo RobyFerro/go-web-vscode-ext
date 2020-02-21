@@ -1,20 +1,20 @@
 import * as vscode from 'vscode';
-import { Command } from '../class/command';
+import { InstallKey } from '../class/install_key';
 
+/**
+ * Generate new Go-Web app key.
+ * This function will change config.yml file by adding the new key.
+ */
 export async function generateKey() {
     let basePath = vscode.workspace.rootPath,
-        command = new Command();
+        command = new InstallKey();
 
     if (basePath !== undefined) {
-
-        command.build(basePath);
-        command.generateKey(basePath);
-
+        command.build();
         command.run().then(() => {
             vscode.window.showInformationMessage('App key successfully generated!');
         }).catch(e => {
-            console.log(e);
-            vscode.window.showErrorMessage("Failed to generate app key");
+            vscode.window.showErrorMessage("Failed to generate app key", e);
         });
     }
 }

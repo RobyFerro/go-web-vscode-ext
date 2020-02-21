@@ -39,7 +39,7 @@ export class Install {
 
     // Dowload Go-Web dependencies
     private getGoModules() {
-        child_process.execSync(`cd ${this.destination} && go mod download`);
+        child_process.execSync(`go mod download`);
     }
 
     // Configuring the project
