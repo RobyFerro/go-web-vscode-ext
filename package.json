@@ -108,6 +108,6 @@
 	"dependencies": {
 		"@types/shelljs": "^0.8.6",
 		"shelljs": "^0.8.5",
-		"simple-git": "^1.131.0"
+		"simple-git": "^1.132.0"
 	}
 }
